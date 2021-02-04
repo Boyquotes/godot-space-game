@@ -17,5 +17,10 @@ func _ready():
 func _process(delta):
 	age += delta
 	var collision = move_and_collide(self.vel * delta)
-	if collision != null or age >= lifelength:
+	if collision != null:
+		if collision.collider.get("health") != null:
+			collision.collider.take_hit(10)
+		queue_free()
+	
+	if age >= lifelength:
 		queue_free()

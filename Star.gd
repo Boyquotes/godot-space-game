@@ -2,9 +2,6 @@ extends KinematicBody2D
 
 
 # Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
 onready var Planet = preload("Planet.tscn")
 
 const orbit_length = 700
@@ -17,6 +14,7 @@ func _ready():
 	for i in range(num_planets):
 		var p = Planet.instance()
 		p.position.x = (i + 1) * orbit_length + self.radius
+		p.z_index = z_index + 2
 		add_child(p)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

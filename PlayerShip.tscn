@@ -7,6 +7,7 @@
 [ext_resource path="res://sprites/planet-blue.png" type="Texture" id=5]
 
 [node name="PlayerShip" type="KinematicBody2D"]
+z_index = 1
 collision_layer = 4
 collision_mask = 7
 script = ExtResource( 2 )
