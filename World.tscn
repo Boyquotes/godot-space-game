@@ -13,4 +13,4 @@ position = Vector2( 832.643, 383.832 )
 position = Vector2( 451.164, 386.363 )
 
 [node name="AIShip" parent="." instance=ExtResource( 4 )]
-position = Vector2( 785.785, 700.692 )
+position = Vector2( 553.954, 847.816 )

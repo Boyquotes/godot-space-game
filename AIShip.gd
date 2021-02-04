@@ -27,21 +27,13 @@ func _process(delta):
 	var to_target = global_position - target.global_position
 	
 	# rotate towards target
-	var desired_angle = fposmod(to_target.angle() + PI, PI * 2)
-	var desired_rot = fposmod(desired_angle - rotation, PI * 2)
-	var max_rot = sign(desired_rot) * rot_speed
+	var desired_angle = to_target.angle() + PI
+	rotation = desired_angle
 	
-	rotation = fposmod(rotation, PI * 2)
-	
-	if rotation < desired_angle:
-		rotation += max_rot * delta
-	else:
-		rotation -= max_rot * delta
-		
 	# control speed
 	var length = to_target.length()
-	#if length > 75:
-	#	thrust(delta)
+	if length > 75:
+		thrust(delta)
 	
 	move_and_collide(vel * delta)
 	
@@ -54,3 +46,7 @@ func reverse(delta):
 
 func _on_AttackRadius_body_entered(body):
 	target = body
+
+func _on_LeaveAloneRadius_body_exited(body):
+	if body == target:
+		target = null
