@@ -3,7 +3,7 @@ extends KinematicBody2D
 onready var Laser = preload("Laser.tscn")
 
 const acc = 300
-const dec = 150
+const dec = 200
 const max_speed = 450
 const rot_speed = PI
 

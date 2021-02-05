@@ -2,8 +2,14 @@ extends "res://Ship.gd"
 
 
 # Declare member variables here. Examples:
-var target = null
+var tactical_target = null # target to shoot at
+var operational_target = null # target of strategic importance
+var state = "defend" # relation to operational_target
 var civ = null
+
+var tactical_considerations = []
+
+const defend_distance = 600
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,20 +18,31 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if target != null:
-		var to_target = global_position - target.global_position
+	if tactical_target != null:
+		var to_target = global_position - tactical_target.global_position
 		
 		# rotate towards target
-		var desired_angle = to_target.angle() + PI
-		rotation = desired_angle
+		var desired_angle = fposmod(to_target.angle() + PI, PI * 2)
+		var desired_rot = short_angle_dist(rotation, desired_angle)
 		
-		# accelerate
+		if abs(desired_rot) > PI / 32:
+			rotation += sign(desired_rot) * rot_speed * delta
+		
 		var length = to_target.length()
-		if length > 75:
+		
+		# TODO: implement better braking
+		if length > vel.length() * delta:
 			thrust(delta)
+		elif abs(desired_rot) < PI / 24:
+			reverse(delta)
 
-		if target.get("health") != null and civ.is_enemy(target):
+		if tactical_target.get("health") != null and civ.is_enemy(tactical_target):
 			shoot(delta)
+
+func short_angle_dist(from, to):
+	var max_angle = PI * 2
+	var difference = fmod(to - from, max_angle)
+	return fmod(2 * difference, max_angle) - difference
 			
 func handle_attack_from(origin):
 	if origin == civ.player:
@@ -33,8 +50,8 @@ func handle_attack_from(origin):
 	
 func _on_AttackRadius_body_entered(body):
 	if body != self and civ.is_enemy(body):
-		target = body
+		tactical_target = body
 
 func _on_LeaveAloneRadius_body_exited(body):
-	if body == target:
-		target = null
+	if body == tactical_target:
+		tactical_target = null

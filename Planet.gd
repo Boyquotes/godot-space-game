@@ -79,7 +79,7 @@ func spawn_ship():
 	var position_node = self.surrounding_points[position_index]
 	var spawn = AIShip.instance()
 	spawn.global_position = position_node.global_position
-	spawn.target = position_node
+	spawn.tactical_target = position_node
 	spawn.change_color(civ.color)
 	spawn.civ = civ
 	get_tree().get_root().add_child(spawn)
