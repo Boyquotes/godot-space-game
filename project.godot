@@ -8,9 +8,14 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "",
+"class": "GitAPI",
+"language": "NativeScript",
+"path": "res://git_api.gdns"
+} ]
 _global_script_class_icons={
-
+"GitAPI": ""
 }
 
 [application]
@@ -23,6 +28,10 @@ config/icon="res://icon.png"
 
 window/size/width=1200
 window/size/height=800
+
+[gdnative]
+
+singletons=[ "res://git_api.gdnlib" ]
 
 [input]
 
@@ -61,7 +70,6 @@ shoot={
 2d_physics/layer_1="Projectiles"
 2d_physics/layer_2="Astronomical Bodies"
 2d_physics/layer_3="Ships"
-2d_physics/layer_4="Structures"
 
 [rendering]
 
