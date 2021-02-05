@@ -61,6 +61,7 @@ shoot={
 2d_physics/layer_1="Projectiles"
 2d_physics/layer_2="Astronomical Bodies"
 2d_physics/layer_3="Ships"
+2d_physics/layer_4="Structures"
 
 [rendering]
 

@@ -9,7 +9,7 @@ var civ_colors = [
 	Color(0.12, 0.56, 1.0),
 	Color(0, 1.0, 0),
 	Color(1.0, 1.0, 0),
-	Color(1.0, 0, 0),
+	Color(1.0, 0.65, 0),
 	Color(0.6, 0, 1.0)
 ]
 
@@ -36,7 +36,8 @@ func _ready():
 	# TODO: figure out why these yields are needed
 	yield(get_tree(), "idle_frame")
 	for p in planets:	
-		p.spawn_ship()
+		if p.civ != null:
+			p.spawn_ship()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
