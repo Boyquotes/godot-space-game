@@ -8,6 +8,8 @@ var planets = []
 var relationship_with_player = 0
 var foreign_relations = {}
 
+var player = null
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -23,3 +25,10 @@ func spawn_on(planet):
 	
 	for i in range(4):
 		planet.add_structure(planet.random_structure_angle())
+
+func is_enemy(body):
+	if body == player:
+		return relationship_with_player < 0
+	
+	if body.get("civ") == null:
+		return false

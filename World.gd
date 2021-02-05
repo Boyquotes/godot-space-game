@@ -19,15 +19,19 @@ func _ready():
 	var map_seed = randi()
 	seed(map_seed)
 	
-	civ_colors.shuffle()
 	
 	yield(get_tree(), "idle_frame")
 	var planets = get_tree().get_nodes_in_group("planets")
+	planets.shuffle()
 	
+	var reputation_graph = $PlayerShip/CanvasLayer/ReputationGraph
 	for i in range(6):
 		var civ = Civilization.new()
+		civ.player = get_node("PlayerShip")
 		civ.color = civ_colors[i]
 		civ.spawn_on(planets[i])
+		reputation_graph.add_civ(civ)
+	reputation_graph.create_bars()
 	
 	# TODO: figure out why these yields are needed
 	yield(get_tree(), "idle_frame")

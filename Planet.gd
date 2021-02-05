@@ -81,6 +81,7 @@ func spawn_ship():
 	spawn.global_position = position_node.global_position
 	spawn.target = position_node
 	spawn.change_color(civ.color)
+	spawn.civ = civ
 	get_tree().get_root().add_child(spawn)
 	
 func set_controlling_civ(controller):

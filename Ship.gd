@@ -104,13 +104,16 @@ func shoot(delta):
 	spawn.global_position = $ShootPoint.global_position
 	spawn.rotation = self.global_rotation	
 	spawn.vel = Vector2(self.max_speed + 200, 0).rotated(spawn.global_rotation)
+	spawn.origin = self
 	spawn.add_collision_exception_with(self)
 	
 	get_parent().add_child(spawn)
 	
-func take_hit(strength):
+func take_hit(strength, origin):
+	handle_attack_from(origin)
 	health -= float(strength)
 	if health <= 0:
 		queue_free()
 
-
+func handle_attack_from(origin):
+	pass

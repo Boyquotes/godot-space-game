@@ -7,6 +7,7 @@ extends KinematicBody2D
 var vel = Vector2(0, 0)
 const lifelength = 2
 var age = 0
+var origin = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,7 +20,7 @@ func _process(delta):
 	var collision = move_and_collide(self.vel * delta)
 	if collision != null:
 		if collision.collider.get("health") != null:
-			collision.collider.take_hit(10)
+			collision.collider.take_hit(10, origin)
 		queue_free()
 	
 	if age >= lifelength:
