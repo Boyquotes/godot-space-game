@@ -5,7 +5,7 @@ extends KinematicBody2D
 # var a = 2
 # var b = "text"
 var vel = Vector2(0, 0)
-const lifelength = 1
+const lifelength = 2
 var age = 0
 
 # Called when the node enters the scene tree for the first time.

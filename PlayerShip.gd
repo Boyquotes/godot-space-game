@@ -19,4 +19,3 @@ func _process(delta):
 		
 	if Input.is_action_pressed("shoot"):
 		shoot(delta)
-

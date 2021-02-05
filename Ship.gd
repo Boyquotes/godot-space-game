@@ -4,20 +4,23 @@ onready var Laser = preload("Laser.tscn")
 
 const acc = 300
 const dec = 150
-const max_speed = 400
+const max_speed = 450
 const rot_speed = PI
 
-const heat_max = 100
+const max_heat = 100
 const reg_vent_rate = 30
-const heat_per_shot = 10
+var heat_per_shot = 10
 var heat = 0
 var venting = false
+
+var color = Color(1.0, 1.0, 1.0)
 
 # heat_per_shot / fire_rate should be > reg_vent_rate
 const fire_rate = 0.1
 var time_since_last_shot = 0
 
-var health = 100
+const max_health = 100.0
+var health = 100.0
 
 var vel = Vector2(0 ,0)
 
@@ -31,6 +34,31 @@ func _process(delta):
 	update_heat(delta)
 	limit_speed()
 	move_and_collide(vel * delta)
+	
+func _draw():
+	var points = [
+		Vector2(	-24, 18),
+		Vector2(-18, 0),
+		Vector2(-24, -18),
+		Vector2(24, 0)			
+	]
+	var colors = PoolColorArray([self.color])
+	draw_polygon(PoolVector2Array(points), colors)
+	
+	create_collision_polygon(points)
+	move_shoot_point_to(points[-1])
+	
+func create_collision_polygon(points):
+	var collision_shape = CollisionPolygon2D.new()
+	collision_shape.polygon = points
+	add_child(collision_shape)
+	
+func move_shoot_point_to(point):
+	get_node("ShootPoint").position = point
+	
+func change_color(new_color):
+	self.color = new_color
+	update()
 
 func limit_speed():
 	if vel.length() > max_speed:
@@ -43,9 +71,9 @@ func reverse(delta):
 	vel -= Vector2(dec * delta, 0).rotated(rotation)
 
 func update_heat(delta):
-	if heat >= heat_max:
+	if heat >= max_heat:
 		venting = true
-		heat = heat_max
+		heat = max_heat
 	elif heat <= 0:
 		venting = false
 		heat = 0
@@ -54,6 +82,11 @@ func update_heat(delta):
 		heat -= reg_vent_rate * 2 * delta
 	else:
 		heat -= reg_vent_rate * delta
+		
+func get_as_percent(value):
+	var at = get(value)
+	var maximum = get("max_" + value)
+	return (at / maximum) * 100
 
 func shoot(delta):
 	time_since_last_shot += delta
@@ -76,7 +109,7 @@ func shoot(delta):
 	get_parent().add_child(spawn)
 	
 func take_hit(strength):
-	health -= strength
+	health -= float(strength)
 	if health <= 0:
 		queue_free()
 

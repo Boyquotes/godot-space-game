@@ -6,6 +6,7 @@ var target = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	heat_per_shot = 20
 	add_to_group("AI-ships")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -21,10 +22,9 @@ func _process(delta):
 		var length = to_target.length()
 		if length > 75:
 			thrust(delta)
-		
-		shoot(delta)
-	else:
-		thrust(delta)
+
+		if target.get("health") != null:
+			shoot(delta)
 	
 func _on_AttackRadius_body_entered(body):
 	if body != self:
