@@ -25,8 +25,8 @@ func _process(dt):
 	
 	var h = get_viewport_rect().size.y
 	if closest_dist > h * 0.6:
-		target_zoom = Vector2(2, 2)
+		target_zoom = Vector2(3, 3)
 	elif closest_dist < h * 0.5:
-		target_zoom = Vector2(1, 1)
+		target_zoom = Vector2(2, 2)
 		
 	zoom = zoom.linear_interpolate(target_zoom, zoom_speed * dt)

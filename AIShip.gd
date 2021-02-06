@@ -9,7 +9,7 @@ var civ = null
 
 var tactical_considerations = []
 
-const defend_distance = 600
+const defend_distance = 1200
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,26 +18,33 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	var target = operational_target
 	if tactical_target != null:
-		var to_target = global_position - tactical_target.global_position
-		
-		# rotate towards target
-		var desired_angle = fposmod(to_target.angle() + PI, PI * 2)
-		var desired_rot = short_angle_dist(rotation, desired_angle)
-		
-		if abs(desired_rot) > PI / 32:
-			rotation += sign(desired_rot) * rot_speed * delta
-		
-		var length = to_target.length()
-		
-		# TODO: implement better braking
-		if length > vel.length() * delta:
-			thrust(delta)
-		elif abs(desired_rot) < PI / 24:
-			reverse(delta)
+		target = tactical_target
+	
+	var to_target = global_position - target.global_position
+	
+	# rotate towards target
+	var desired_angle = fposmod(to_target.angle() + PI, PI * 2)
+	var desired_rot = short_angle_dist(rotation, desired_angle)
+	
+	if abs(desired_rot) > PI / 32:
+		rotation += sign(desired_rot) * rot_speed * delta
+	
+	var length = to_target.length()
+	
+	# TODO: implement better braking
+	if length > vel.length() * delta:
+		thrust(delta)
+	elif abs(desired_rot) < PI / 24:
+		reverse(delta)
 
-		if tactical_target.get("health") != null and civ.is_enemy(tactical_target):
-			shoot(delta)
+	if target.get("health") != null and civ.is_enemy(target):
+		shoot(delta)
+
+	var targ_to_operation_dist = target.global_position.distance_to(operational_target.global_position)
+	if self.state == "defend" and targ_to_operation_dist >= defend_distance:
+		tactical_target = null
 
 func short_angle_dist(from, to):
 	var max_angle = PI * 2

@@ -25,10 +25,10 @@ tracked_value = "heat"
 position = Vector2( 7.79648, 76.2224 )
 
 [node name="Star" parent="." instance=ExtResource( 3 )]
-position = Vector2( 451.164, 386.363 )
+position = Vector2( -2800.24, -2436.71 )
 
 [node name="Star2" parent="." instance=ExtResource( 3 )]
-position = Vector2( 6981.88, -478.667 )
+position = Vector2( 7760.66, -1705.25 )
 
 [node name="Star3" parent="." instance=ExtResource( 3 )]
-position = Vector2( 4375.55, 3637.12 )
+position = Vector2( 3421.54, 7569.96 )

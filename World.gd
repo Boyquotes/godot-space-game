@@ -38,6 +38,7 @@ func _ready():
 	for p in planets:	
 		if p.civ != null:
 			p.spawn_ship()
+			p.spawn_ship()			
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

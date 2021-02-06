@@ -30,6 +30,8 @@ func _ready():
 	var map_seed = randi()
 	seed(map_seed)
 	
+	$AnimatedSprite.frame = randi() % 3
+	
 	rot_speed = PI / rand_range(4, 8)
 	orbit_speed = PI / rand_range(24, 36)
 	orbit_angle = rand_range(0, 2 * PI)
@@ -78,8 +80,9 @@ func spawn_ship():
 	var position_index = randi() % num_surrounding_points
 	var position_node = self.surrounding_points[position_index]
 	var spawn = AIShip.instance()
-	spawn.global_position = position_node.global_position
-	spawn.tactical_target = position_node
+	var offset = Vector2(rand_range(-50, 50), rand_range(-50, 50))
+	spawn.global_position = position_node.global_position + offset
+	spawn.operational_target = position_node
 	spawn.change_color(civ.color)
 	spawn.civ = civ
 	get_tree().get_root().add_child(spawn)
