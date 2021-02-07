@@ -19,7 +19,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
-func draw_circle_arc(center, radius, angle_from, angle_to, color, pts=32):
+func draw_circle_arc(center, radius, angle_from, angle_to, color, pts=50):
 	var nb_points = pts
 	var points_arc = PoolVector2Array()
 
@@ -28,11 +28,11 @@ func draw_circle_arc(center, radius, angle_from, angle_to, color, pts=32):
 		points_arc.push_back(center + Vector2(cos(angle_point), sin(angle_point)) * radius)
 
 	for index_point in range(nb_points):
-		draw_line(points_arc[index_point], points_arc[index_point + 1], color)
+		var line = [points_arc[index_point], points_arc[index_point + 1], color]
 		
 func _draw():
 	draw_circle(Vector2(0, 0), self.radius, Color(1.0, 1.0, 0.0))
 	
-	# draw orbits
+#	# draw orbits
 	for i in range(num_planets):
-		draw_circle_arc(Vector2(0, 0), orbit_length * (i + 1) + self.radius, 0, 360, Color(0.3, 0.3, 0.3), 50)
+		draw_circle_arc(Vector2(0, 0), orbit_length * (i + 1) + self.radius, 0, 360, Color(0.3, 0.3, 0.3), 20)

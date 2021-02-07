@@ -32,5 +32,7 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeaveAloneRadius"]
 shape = SubResource( 2 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 [connection signal="body_entered" from="AttackRadius" to="." method="_on_AttackRadius_body_entered"]
 [connection signal="body_exited" from="LeaveAloneRadius" to="." method="_on_LeaveAloneRadius_body_exited"]

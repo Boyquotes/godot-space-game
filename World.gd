@@ -24,6 +24,9 @@ func _ready():
 	var planets = get_tree().get_nodes_in_group("planets")
 	planets.shuffle()
 	
+	if planets.size() == 0:
+		return
+	
 	var reputation_graph = $PlayerShip/CanvasLayer/ReputationGraph
 	for i in range(6):
 		var civ = Civilization.new()
@@ -38,7 +41,8 @@ func _ready():
 	for p in planets:	
 		if p.civ != null:
 			p.spawn_ship()
-			p.spawn_ship()			
+			p.spawn_ship()
+			p.spawn_ship()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

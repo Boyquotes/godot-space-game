@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://PlayerShip.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World.gd" type="Script" id=2]
 [ext_resource path="res://Star.tscn" type="PackedScene" id=3]
 [ext_resource path="res://StatusBar.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ReputationGraph.tscn" type="PackedScene" id=5]
+[ext_resource path="res://FPSCounter.gd" type="Script" id=6]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 2 )
@@ -24,11 +25,18 @@ tracked_value = "heat"
 [node name="ReputationGraph" parent="PlayerShip/CanvasLayer" instance=ExtResource( 5 )]
 position = Vector2( 7.79648, 76.2224 )
 
+[node name="FPSCounter" type="RichTextLabel" parent="PlayerShip/CanvasLayer"]
+margin_left = 1036.0
+margin_top = 8.0
+margin_right = 1095.0
+margin_bottom = 44.0
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Star" parent="." instance=ExtResource( 3 )]
-position = Vector2( -2800.24, -2436.71 )
+position = Vector2( -40.4797, 38.9093 )
 
 [node name="Star2" parent="." instance=ExtResource( 3 )]
-position = Vector2( 7760.66, -1705.25 )
-
-[node name="Star3" parent="." instance=ExtResource( 3 )]
-position = Vector2( 3421.54, 7569.96 )
+position = Vector2( 5066.39, -913.967 )

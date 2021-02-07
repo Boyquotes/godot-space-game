@@ -2,9 +2,9 @@ extends KinematicBody2D
 
 onready var Laser = preload("Laser.tscn")
 
-const acc = 300
-const dec = 200
-const max_speed = 450
+const acc = 175
+const dec = 160
+const max_speed = 300
 const rot_speed = PI
 
 const max_heat = 100
@@ -37,10 +37,10 @@ func _process(delta):
 	
 func _draw():
 	var points = [
-		Vector2(	-24, 18),
-		Vector2(-18, 0),
-		Vector2(-24, -18),
-		Vector2(24, 0)			
+		Vector2(	-18, 13),
+		Vector2(-13, 0),
+		Vector2(-18, -13),
+		Vector2(18, 0)			
 	]
 	var colors = PoolColorArray([self.color])
 	draw_polygon(PoolVector2Array(points), colors)
@@ -103,7 +103,7 @@ func shoot(delta):
 	var spawn = Laser.instance()
 	spawn.global_position = $ShootPoint.global_position
 	spawn.rotation = self.global_rotation	
-	spawn.vel = Vector2(self.max_speed + 200, 0).rotated(spawn.global_rotation)
+	spawn.vel = Vector2(self.max_speed + 100, 0).rotated(spawn.global_rotation)
 	spawn.origin = self
 	spawn.add_collision_exception_with(self)
 	
