@@ -6,7 +6,7 @@
 [ext_resource path="res://StatusBar.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ReputationGraph.tscn" type="PackedScene" id=5]
 [ext_resource path="res://FPSCounter.gd" type="Script" id=6]
-[ext_resource path="res://sprites/background.ong.jpg" type="Texture" id=7]
+[ext_resource path="res://sprites/background.png" type="Texture" id=7]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 2 )
@@ -17,14 +17,17 @@ position = Vector2( 188.774, 122.848 )
 [node name="CanvasLayer" type="CanvasLayer" parent="PlayerShip"]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="PlayerShip/CanvasLayer"]
-scroll_ignore_camera_zoom = true
+scroll_base_scale = Vector2( 0.2, 0.2 )
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="PlayerShip/CanvasLayer/ParallaxBackground"]
 motion_scale = Vector2( 0.5, 0.5 )
-motion_mirroring = Vector2( 500, 400 )
+motion_mirroring = Vector2( 3000, 3000 )
 
 [node name="Sprite" type="Sprite" parent="PlayerShip/CanvasLayer/ParallaxBackground/ParallaxLayer"]
+scale = Vector2( 2, 2 )
 texture = ExtResource( 7 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 3000, 3000 )
 
 [node name="HealthBar" parent="PlayerShip/CanvasLayer" instance=ExtResource( 4 )]
 position = Vector2( 7.79648, 8.20682 )
