@@ -8,12 +8,12 @@ extends KinematicBody2D
 var nearby_enemies = []
 var target = null
 
-onready var shootpoint = get_node("Barrel/Shootpoint")
+onready var shootpoints = get_node("Barrel/Shootpoints").get_children()
 onready var Laser = preload("res://Laser.tscn")
 
-var rot_speed = PI / 2
+var rot_speed = PI / 3
 var rot_range = PI / 2
-var laser_speed = 600
+var laser_speed = 700
 
 const fire_rate = 0.2
 var time_since_last_shot = 0
@@ -38,8 +38,15 @@ func _process(delta):
 		target = null
 	
 	if target != null:
-		$Barrel.look_at(target.global_position)
-		$Barrel.rotation += PI / 2
+		var to_target = global_position - target.global_position
+		
+		# rotate towards target
+		var desired_angle = fposmod(to_target.angle() + PI, PI * 2) + PI / 2
+		var desired_rot = short_angle_dist($Barrel.global_rotation, desired_angle)
+		
+		if abs(desired_rot) > PI / 32:
+			$Barrel.rotation += sign(desired_rot) * rot_speed * delta
+			$Barrel.rotation = clamp($Barrel.rotation, -rot_range / 2, rot_range / 2)
 		
 		shoot(delta)
 
@@ -56,18 +63,20 @@ func shoot(delta):
 	elif time_since_last_shot >= fire_rate:
 		time_since_last_shot = 0
 	
-	var spawn = Laser.instance()
-	spawn.global_position = shootpoint.global_position
-	spawn.rotation = self.global_rotation + $Barrel.rotation - PI / 2
-	spawn.vel = Vector2(laser_speed, 0).rotated(spawn.global_rotation)
-	spawn.origin = self
-	spawn.add_collision_exception_with(self)
+	for shootpoint in shootpoints:
+		var spawn = Laser.instance()
+		spawn.global_position = shootpoint.global_position
+		spawn.rotation = self.global_rotation + $Barrel.rotation - PI / 2
+		spawn.vel = Vector2(laser_speed, 0).rotated(spawn.global_rotation)
+		spawn.origin = self
+		spawn.add_collision_exception_with(self)
 	
-	get_tree().get_root().add_child(spawn)
+		get_tree().get_root().get_node("World").add_child(spawn)
 	
 func set_color(color):
 	$Body.color = color
 	$Barrel/ColorRect.color = color
+	$Barrel/ColorRect2.color = color
 	
 
 func _on_DetectionZone_body_entered(body):
