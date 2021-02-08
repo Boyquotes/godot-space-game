@@ -1,13 +1,16 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://PlayerShip.gd" type="Script" id=2]
 [ext_resource path="res://Camera2D.gd" type="Script" id=3]
 [ext_resource path="res://Wayfinder.gd" type="Script" id=4]
 [ext_resource path="res://sprites/planet-blue.png" type="Texture" id=5]
 
+[sub_resource type="CircleShape2D" id=1]
+radius = 22.7519
+
 [node name="PlayerShip" type="KinematicBody2D"]
 z_index = 1
-collision_layer = 4
+collision_layer = 20
 collision_mask = 3
 script = ExtResource( 2 )
 
@@ -25,3 +28,12 @@ texture = ExtResource( 5 )
 
 [node name="ShootPoint" type="Position2D" parent="."]
 position = Vector2( 13.8261, 0.294174 )
+
+[node name="LandingGear" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LandingGear"]
+shape = SubResource( 1 )
+[connection signal="body_entered" from="LandingGear" to="." method="_on_LandingGear_body_entered"]
+[connection signal="body_exited" from="LandingGear" to="." method="_on_LandingGear_body_exited"]

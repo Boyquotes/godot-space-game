@@ -36,3 +36,10 @@ func _draw():
 #	# draw orbits
 	for i in range(num_planets):
 		draw_circle_arc(Vector2(0, 0), orbit_length * (i + 1) + self.radius, 0, 360, Color(0.3, 0.3, 0.3), 20)
+
+
+func _on_System_body_entered(body):
+	body.get_node("CanvasLayer/Message").bbcode_text = "[center]Star System[/center]"
+
+func _on_System_body_exited(body):
+	body.get_node("CanvasLayer/Message").bbcode_text = "[center]Deep Space[/center]"

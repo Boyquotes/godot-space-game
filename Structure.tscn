@@ -3,21 +3,41 @@
 [ext_resource path="res://Structure.gd" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 16, 16 )
+extents = Vector2( 16, 24.9749 )
 
 [node name="Structure" type="KinematicBody2D"]
 collision_layer = 8
 collision_mask = 0
 script = ExtResource( 1 )
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Rects" type="Node2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Rects"]
 margin_left = -16.0
+margin_top = -6.0
+margin_right = -7.0
+margin_bottom = 16.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="ColorRect" parent="Rects"]
+margin_left = -5.0
+margin_top = -25.0
+margin_right = 5.0
+margin_bottom = 16.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect3" type="ColorRect" parent="Rects"]
+margin_left = 7.0
 margin_top = -16.0
 margin_right = 16.0
 margin_bottom = 16.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )

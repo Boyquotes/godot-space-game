@@ -7,6 +7,8 @@ onready var Structure = preload("res://Structure.tscn")
 onready var AIShip = preload("res://AIShip.tscn")
 onready var DebugMarker = preload("res://DebugMarker.tscn")
 
+export var label_offset = 20
+
 var rot_speed = 0#PI / rand_range(4, 8)
 var orbit_speed = 0#PI / rand_range(24, 36)
 var orbit_angle = 0#rand_range(0, 2 * PI)
@@ -161,6 +163,8 @@ func shifted_color(color):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	rotation += rot_speed * delta
+	$Label.set_rotation(-rotation)
+	$Label.set_global_position(Vector2(-radius, radius + label_offset) + global_position)
 	
 	$Shadow.look_at(get_parent().global_position)
 	
@@ -176,7 +180,7 @@ func random_structure_angle():
 func add_structure(angle):
 	var struct = Structure.instance()
 	struct.position = Vector2(radius, 0).rotated(angle)
-	struct.rotation = angle
+	struct.rotation = angle + PI / 2
 	struct.z_index = -1
 	structures.append(struct)
 	struct.set_color(civ.color)

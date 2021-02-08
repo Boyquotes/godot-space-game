@@ -5,14 +5,14 @@ extends Node
 var color = Color(1.0, 1.0, 1.0)
 
 var planets = []
-var relationship_with_player = 0
+var relationship_with_player = randi() % 16 - 8
 var foreign_relations = {}
 
 var player = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

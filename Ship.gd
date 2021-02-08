@@ -13,6 +13,9 @@ var heat_per_shot = 10
 var heat = 0
 var venting = false
 
+const max_shield = 100
+var shield = 50
+
 var color = Color(1.0, 1.0, 1.0)
 
 # heat_per_shot / fire_rate should be > reg_vent_rate

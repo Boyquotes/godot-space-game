@@ -1,3 +1,4 @@
+import os
 import random
 import pygame as pg
 
@@ -15,12 +16,15 @@ def generate_layer():
         pg.draw.circle(image, (255, 255, 255), (x, y), radius)
     return image
 
-def save(img, path="sprites/background.png"):
+def save(img, path):
     pg.image.save(img, path)
+    os.system(f"magick convert {path} -transparent black {path}")
 
 def main():
     l = generate_layer()
-    save(l)
+    save(l, "sprites/background.png")
+    l = generate_layer()
+    save(l, "sprites/background-2.png")
 
 if __name__ == "__main__":
     main()

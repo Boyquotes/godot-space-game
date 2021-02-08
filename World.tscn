@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://PlayerShip.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World.gd" type="Script" id=2]
@@ -7,12 +7,13 @@
 [ext_resource path="res://ReputationGraph.tscn" type="PackedScene" id=5]
 [ext_resource path="res://FPSCounter.gd" type="Script" id=6]
 [ext_resource path="res://sprites/background.png" type="Texture" id=7]
+[ext_resource path="res://sprites/background-2.png" type="Texture" id=8]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="PlayerShip" parent="." instance=ExtResource( 1 )]
-position = Vector2( 188.774, 122.848 )
+position = Vector2( 192, 128 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="PlayerShip"]
 
@@ -26,6 +27,16 @@ motion_mirroring = Vector2( 3000, 3000 )
 [node name="Sprite" type="Sprite" parent="PlayerShip/CanvasLayer/ParallaxBackground/ParallaxLayer"]
 scale = Vector2( 2, 2 )
 texture = ExtResource( 7 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 3000, 3000 )
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="PlayerShip/CanvasLayer/ParallaxBackground"]
+motion_scale = Vector2( 0.25, 0.25 )
+motion_mirroring = Vector2( 3000, 3000 )
+
+[node name="Sprite" type="Sprite" parent="PlayerShip/CanvasLayer/ParallaxBackground/ParallaxLayer2"]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 8 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 3000, 3000 )
 
@@ -49,8 +60,26 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Message" type="RichTextLabel" parent="PlayerShip/CanvasLayer"]
+margin_top = 728.0
+margin_right = 1200.0
+margin_bottom = 768.0
+bbcode_enabled = true
+bbcode_text = "[center]You should really learn the rules of this exciting new game[/center]"
+text = "You should really learn the rules of this exciting new game"
+fit_content_height = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Star" parent="." instance=ExtResource( 3 )]
-position = Vector2( -40.4797, 38.9093 )
+position = Vector2( -32.3855, 41.811 )
 
 [node name="Star2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 5066.39, -913.967 )
+
+[node name="Star3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 3506.51, 4177.93 )
+
+[node name="Star4" parent="." instance=ExtResource( 3 )]
+position = Vector2( -3000, 5141.29 )
