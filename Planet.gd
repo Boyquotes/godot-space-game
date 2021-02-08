@@ -4,6 +4,7 @@ extends KinematicBody2D
 # Declare member variables here. Examples:
 
 onready var Structure = preload("res://Structure.tscn")
+onready var MissileBase = preload("res://MissileBase.tscn")
 onready var AIShip = preload("res://AIShip.tscn")
 onready var DebugMarker = preload("res://DebugMarker.tscn")
 
@@ -178,7 +179,7 @@ func random_structure_angle():
 	return spot * PI / 8
 
 func add_structure(angle):
-	var struct = Structure.instance()
+	var struct = MissileBase.instance()#Structure.instance()
 	struct.position = Vector2(radius, 0).rotated(angle)
 	struct.rotation = angle + PI / 2
 	struct.z_index = -1

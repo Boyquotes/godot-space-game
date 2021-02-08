@@ -39,8 +39,8 @@ func _process(delta):
 	elif abs(desired_rot) < PI / 24:
 		reverse(delta)
 
-	if target.get("health") != null and civ.is_enemy(target):
-		shoot(delta)
+#	if target.get("health") != null and civ.is_enemy(target):
+#		shoot(delta)
 
 	var targ_to_operation_dist = target.global_position.distance_to(operational_target.global_position)
 	if self.state == "defend" and targ_to_operation_dist >= defend_distance:

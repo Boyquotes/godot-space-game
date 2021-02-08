@@ -77,9 +77,3 @@ position = Vector2( -32.3855, 41.811 )
 
 [node name="Star2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 5066.39, -913.967 )
-
-[node name="Star3" parent="." instance=ExtResource( 3 )]
-position = Vector2( 3506.51, 4177.93 )
-
-[node name="Star4" parent="." instance=ExtResource( 3 )]
-position = Vector2( -3000, 5141.29 )
