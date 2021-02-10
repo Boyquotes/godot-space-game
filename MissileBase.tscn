@@ -1,9 +1,6 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://MissileBase.gd" type="Script" id=1]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 10.5635, 16 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 16, 10.6775 )
@@ -29,10 +26,6 @@ __meta__ = {
 position = Vector2( 0, -7.53671 )
 collision_layer = 0
 collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Barrel"]
-position = Vector2( 0, -7.53671 )
-shape = SubResource( 1 )
 
 [node name="ColorRect" type="ColorRect" parent="Barrel"]
 margin_left = -10.9827
@@ -63,9 +56,8 @@ position = Vector2( 0, -7.53671 )
 shape = SubResource( 2 )
 
 [node name="DetectionZone" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
-collision_mask = 20
+collision_mask = 28
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone"]
 position = Vector2( 0, -500 )

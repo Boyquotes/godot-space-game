@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends "res://Structure.gd"
 
 
 # Declare member variables here. Examples:
@@ -10,6 +10,8 @@ var target = null
 
 onready var shootpoints = get_node("Barrel/Shootpoints").get_children()
 onready var Laser = preload("res://Laser.tscn")
+onready var Torpedo = preload("Torpedo.tscn")
+onready var world = get_tree().get_root().get_node("World")
 
 var rot_speed = PI / 3
 var rot_range = PI / 2
@@ -64,7 +66,7 @@ func shoot(delta):
 		time_since_last_shot = 0
 	
 	for shootpoint in shootpoints:
-		var spawn = Laser.instance()
+		var spawn = world.get_laser()
 		spawn.global_position = shootpoint.global_position
 		spawn.rotation = self.global_rotation + $Barrel.rotation - PI / 2
 		spawn.vel = Vector2(laser_speed, 0).rotated(spawn.global_rotation)

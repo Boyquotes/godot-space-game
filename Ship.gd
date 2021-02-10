@@ -1,6 +1,8 @@
 extends KinematicBody2D
 
 onready var Laser = preload("Laser.tscn")
+onready var Torpedo = preload("Torpedo.tscn")
+onready var world = get_tree().get_root().get_node("World")
 
 const acc = 175
 const dec = 160
@@ -15,6 +17,11 @@ var venting = false
 
 const max_shield = 100
 var shield = 50
+
+var max_torpedos = 1000.0
+var torpedos = 1000.0
+
+var torpedo_alert = null
 
 var color = Color(1.0, 1.0, 1.0)
 
@@ -102,21 +109,42 @@ func shoot(delta):
 		time_since_last_shot = 0
 	
 	heat += heat_per_shot
-	
-	var spawn = Laser.instance()
+	shoot_projectile(delta, world.get_laser(), max_speed + 250)
+
+func shoot_projectile(delta, spawn, initial_vel):
 	spawn.global_position = $ShootPoint.global_position
-	spawn.rotation = self.global_rotation	
-	spawn.vel = Vector2(self.max_speed + 100, 0).rotated(spawn.global_rotation)
+	spawn.rotation = self.global_rotation
+	spawn.vel = Vector2(initial_vel, 0).rotated(spawn.global_rotation)
 	spawn.origin = self
 	spawn.add_collision_exception_with(self)
 	
 	get_parent().add_child(spawn)
 	
+func shoot_torpedo(delta):
+	time_since_last_shot += delta * 3
+	if venting:
+		return
+		
+	if time_since_last_shot < fire_rate:
+		return
+	elif time_since_last_shot >= fire_rate:
+		time_since_last_shot = 0
+	
+	heat += heat_per_shot
+	
+	if torpedos > 0:
+		torpedos -= 1
+		var spawn = Torpedo.instance()
+		shoot_projectile(delta, spawn, vel.length())
+	
 func take_hit(strength, origin):
 	handle_attack_from(origin)
 	health -= float(strength)
 	if health <= 0:
-		queue_free()
+		die()
+		
+func die():
+	queue_free()
 
 func handle_attack_from(origin):
 	pass

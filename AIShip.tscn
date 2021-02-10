@@ -11,7 +11,7 @@ radius = 900.0
 [node name="AIShip" type="KinematicBody2D"]
 z_index = 1
 collision_layer = 4
-collision_mask = 3
+collision_mask = 2
 script = ExtResource( 2 )
 
 [node name="ShootPoint" type="Position2D" parent="."]

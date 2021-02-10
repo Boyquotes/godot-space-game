@@ -21,6 +21,8 @@ func _process(delta):
 		
 	if Input.is_action_pressed("shoot"):
 		shoot(delta)
+#	elif Input.is_action_pressed("shoot_torpedo"):
+#		shoot_torpedo(delta)
 		
 	if Input.is_action_just_pressed("land"):
 		land()
@@ -38,6 +40,8 @@ func update_heat_bar_color():
 	else:
 		$CanvasLayer/HeatBar/Fill.color = Color(1.0, 1.0, 1.0)		
 
+func die():
+	queue_free()
 
 func _on_LandingGear_body_entered(body):
 	if body.is_in_group("structures"):

@@ -8,14 +8,19 @@ const orbit_length = 700
 const num_planets = 3
 var radius = 0
 
+var starname = "Star System"
+var planets = []
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	add_to_group("stars")
 	self.radius = $CollisionShape2D.shape.radius
 	for i in range(num_planets):
 		var p = Planet.instance()
 		p.position.x = (i + 1) * orbit_length + self.radius
 		p.z_index = z_index + 2
 		add_child(p)
+		planets.append(p)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
@@ -39,7 +44,7 @@ func _draw():
 
 
 func _on_System_body_entered(body):
-	body.get_node("CanvasLayer/Message").bbcode_text = "[center]Star System[/center]"
+	body.get_node("CanvasLayer/Message").bbcode_text = "[center]{starname}[/center]".format({"starname": starname})
 
 func _on_System_body_exited(body):
 	body.get_node("CanvasLayer/Message").bbcode_text = "[center]Deep Space[/center]"

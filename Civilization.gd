@@ -38,3 +38,5 @@ func is_enemy(body):
 		
 	if body.civ == self:
 		return false
+		
+	return true

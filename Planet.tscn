@@ -59,7 +59,7 @@ animations = [ {
 
 [node name="Planet" type="KinematicBody2D"]
 collision_layer = 2147483650
-collision_mask = 7
+collision_mask = 0
 script = ExtResource( 2 )
 label_offset = 25
 

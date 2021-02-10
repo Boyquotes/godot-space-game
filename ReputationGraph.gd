@@ -11,6 +11,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if civs.size() == 0:
+		return
 	var bar_w = $Baseline.get_size().x / civs.size()	
 	for civ in bars:
 		var bar = bars[civ]

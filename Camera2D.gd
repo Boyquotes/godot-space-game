@@ -5,6 +5,9 @@ extends Camera2D
 # var a = 2
 # var b = "text"
 
+export var debug_zoom = false
+export var debug_zoom_amount = 5
+
 const zoom_speed = 1.0
 
 var target_zoom = Vector2(1, 1)
@@ -28,5 +31,8 @@ func _process(dt):
 		target_zoom = Vector2(2.25, 2.25)
 	elif closest_dist < h * 0.5:
 		target_zoom = Vector2(1.0, 1.0)
+	
+	if debug_zoom:
+		target_zoom = Vector2(debug_zoom_amount, debug_zoom_amount)
 		
 	zoom = zoom.linear_interpolate(target_zoom, zoom_speed * dt)

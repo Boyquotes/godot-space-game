@@ -28,7 +28,7 @@ var structures = []
 
 var surrounding_points = []
 const num_surrounding_points = 3
-const surrounding_point_distance = 100 + radius
+var surrounding_point_distance = 100 + radius
 
 var civ = null
 
@@ -185,6 +185,7 @@ func add_structure(angle, type):
 	struct.z_index = -1
 	structures.append(struct)
 	struct.set_color(civ.color)
+	struct.civ = civ
 	add_child(struct)
 	
 func spawn_ship():
