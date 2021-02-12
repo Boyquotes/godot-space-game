@@ -6,13 +6,13 @@ extends KinematicBody2D
 # var b = "text"
 var vel = Vector2(0, 0)
 var acc = 100
-var max_speed = 250
+var max_speed = 300
 const lifelength = 5
 var age = 0
 var origin = null
 var target = null
 
-var rot_speed = PI / 3
+var rot_speed = PI / 6
 
 var world = null
 

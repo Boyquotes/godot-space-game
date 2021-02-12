@@ -21,8 +21,8 @@ func _process(delta):
 		
 	if Input.is_action_pressed("shoot"):
 		shoot(delta)
-#	elif Input.is_action_pressed("shoot_torpedo"):
-#		shoot_torpedo(delta)
+	elif Input.is_action_pressed("shoot_torpedo"):
+		shoot_torpedo(delta)
 		
 	if Input.is_action_just_pressed("land"):
 		land()
@@ -33,6 +33,7 @@ func land():
 	if landing_target != null:
 		if not landing_target.get_parent().civ.is_enemy(self):
 			self.health = self.max_health
+			self.torpedos = self.max_torpedos
 		
 func update_heat_bar_color():
 	if venting:

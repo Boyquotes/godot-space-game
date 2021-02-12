@@ -18,8 +18,8 @@ var venting = false
 const max_shield = 100
 var shield = 50
 
-var max_torpedos = 1000.0
-var torpedos = 1000.0
+var max_torpedos = 3.0
+var torpedos = 3.0
 
 var torpedo_alert = null
 
@@ -27,7 +27,10 @@ var color = Color(1.0, 1.0, 1.0)
 
 # heat_per_shot / fire_rate should be > reg_vent_rate
 const fire_rate = 0.1
-var time_since_last_shot = 0
+var time_since_last_shot = fire_rate
+
+const torpedo_fire_rate = 0.5
+var time_since_last_torpedo = torpedo_fire_rate
 
 const max_health = 100.0
 var health = 100.0
@@ -54,6 +57,7 @@ func _draw():
 	]
 	var colors = PoolColorArray([self.color])
 	draw_polygon(PoolVector2Array(points), colors)
+
 	
 	create_collision_polygon(points)
 	move_shoot_point_to(points[-1])
@@ -121,14 +125,14 @@ func shoot_projectile(delta, spawn, initial_vel):
 	get_parent().add_child(spawn)
 	
 func shoot_torpedo(delta):
-	time_since_last_shot += delta * 3
+	time_since_last_torpedo += delta
 	if venting:
 		return
 		
-	if time_since_last_shot < fire_rate:
+	if time_since_last_torpedo < torpedo_fire_rate:
 		return
-	elif time_since_last_shot >= fire_rate:
-		time_since_last_shot = 0
+	elif time_since_last_torpedo >= torpedo_fire_rate:
+		time_since_last_torpedo = 0
 	
 	heat += heat_per_shot
 	

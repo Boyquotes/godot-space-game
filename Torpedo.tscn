@@ -6,7 +6,7 @@
 extents = Vector2( 15, 4 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 237.306, 201.119 )
+extents = Vector2( 540.483, 58.8648 )
 
 [node name="Torpedo" type="KinematicBody2D"]
 collision_mask = 14
@@ -30,6 +30,6 @@ collision_layer = 0
 collision_mask = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone"]
-position = Vector2( 266.79, 0 )
+position = Vector2( 543.808, 0 )
 shape = SubResource( 2 )
 [connection signal="body_entered" from="DetectionZone" to="." method="_on_DetectionZone_body_entered"]
